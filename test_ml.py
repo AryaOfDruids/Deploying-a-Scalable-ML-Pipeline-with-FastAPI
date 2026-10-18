@@ -1,21 +1,13 @@
 import os
 
-import pytest
-# TODO: add necessary import
 import numpy as np
 import pandas as pd
 import pytest
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import train_test_split
+
 from ml.data import process_data
-from ml.model import (
-    compute_model_metrics,
-    inference,
-    load_model,
-    performance_on_categorical_slice,
-    save_model,
-    train_model,
-)
+from ml.model import compute_model_metrics, inference, train_model
 
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(PROJECT_PATH, "data", "census.csv")
@@ -30,6 +22,7 @@ CAT_FEATURES = [
     "sex",
     "native-country",
 ]
+
 
 @pytest.fixture(scope="module")
 def data():
@@ -72,7 +65,7 @@ def model(processed):
     X_train, y_train = processed[0], processed[1]
     return train_model(X_train, y_train)
 
-# TODO: implement the first test. Change the function name and input as needed
+
 def test_data_shape_and_columns(data):
     """Check that the data has the expected columns, no nulls, and two salary labels."""
     assert data.shape[0] > 30000
@@ -83,7 +76,6 @@ def test_data_shape_and_columns(data):
     assert set(data["salary"].unique()) == {"<=50K", ">50K"}
 
 
-# TODO: implement the second test. Change the function name and input as needed
 def test_train_test_split_size(data, split_data):
     """Check that the train and test datasets are DataFrames with an 80/20 split."""
     train, test = split_data
@@ -93,7 +85,6 @@ def test_train_test_split_size(data, split_data):
     assert len(test) == pytest.approx(0.20 * len(data), abs=1)
 
 
-# TODO: implement the third test. Change the function name and input as needed
 def test_train_model_algorithm(model):
     """Check that train_model returns a fitted GradientBoostingClassifier."""
     assert isinstance(model, GradientBoostingClassifier)

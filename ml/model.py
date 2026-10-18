@@ -4,6 +4,7 @@ from ml.data import process_data
 # TODO: add necessary import
 from sklearn.ensemble import GradientBoostingClassifier
 
+
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
     """
@@ -70,6 +71,7 @@ def inference(model, X):
     preds = model.predict(X)
     return preds
 
+
 def save_model(model, path):
     """ Serializes model to a file.
 
@@ -84,12 +86,13 @@ def save_model(model, path):
     with open(path, "wb") as f:
         pickle.dump(model, f)
 
+
 def load_model(path):
     """ Loads pickle file from `path` and returns it."""
     # TODO: implement the function
     with open(path, "rb") as f:
         model = pickle.load(f)
-    return model   
+    return model
 
 
 def performance_on_categorical_slice(
